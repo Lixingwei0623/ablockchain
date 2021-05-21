@@ -1,3 +1,10 @@
+/*
+* 已经弃用，请查看User.js
+*
+*
+* */
+
+
 var Chain=require("./Chain");
 var BlockChain=new Chain.BlockChain();
 var http=require('http');
