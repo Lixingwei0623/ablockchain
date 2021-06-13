@@ -75,7 +75,7 @@ function broadcastBlock(block) {
     console.log("broadcast");
     var options = {
         hostname: 'localhost',
-        port: port+1,
+        port: 2343,
         path: '/receive',
         method: 'POST',
         headers: {
@@ -109,30 +109,6 @@ function broadcastBlock(block) {
         console.log((port+1)+"发送失败");
     }
 
-    options.port=port-1;
-    try {
-        var req2=http.request(options,function (res) {
-            res.on('end',function () {
-                console.log("已经发送至："+(port-1));
-            });
-            res.on('data',function (chunk) {
-                console.log("没什么");
-                console.log(chunk);
-            });
-            res.on('error',function (err) {
-                console.log((port-1)+"数据传输出错");
-            })
-        });
-        req2.on('error',function (err) {
-            console.log((port-1)+"未上线，未向其发送2");
-            req2.end();
-        })
-        req2.write(blockString);
-        req2.end();
-        //console.log("已经发送至："+(port-1));
-    }catch (err) {
-        console.log((port-1)+"发送失败");
-    }
 
     var ports=BlockChain.head.creators;
     for (var i=0;i<ports.length;i++){
